@@ -1,9 +1,9 @@
 from genanki import Model
 
-from anki_ids import DEFINITION_TO_TERM_ID, TERM_TO_DEFINITION_ID
+from .anki_ids import DEFINITION_ID
 
-term_2_def_model = Model(
-    DEFINITION_TO_TERM_ID,
+definition_model = Model(
+    DEFINITION_ID,
     'Definition Model',
     fields=[
         {'name': 'Term'},
@@ -11,25 +11,9 @@ term_2_def_model = Model(
     ],
     templates=[
         {
-            'name': 'Term to Definition',
+            'name': 'Definition',
             'qfmt': '{{Term}}',
             'afmt': '{{FrontSide}}<hr id="answer">{{Definition}}',
-        },
-    ],
-)
-
-def_2_term_model = Model(
-    TERM_TO_DEFINITION_ID,
-    'Term Model',
-    fields=[
-        {'name': 'Definition'},
-        {'name': 'Term'},
-    ],
-    templates=[
-        {
-            'name': 'Definition to Term',
-            'qfmt': '{{Definition}}',
-            'afmt': '{{FrontSide}}<hr id="answer">{{Term}}',
         },
     ],
 )
