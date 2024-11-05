@@ -9,6 +9,7 @@ from anki_models.definition_model import definition_model
 CHEMISTRY_URL = f'{BASE_URI}/chemistry-2e'
 
 #%%
+
 def get_terms(chapter: int):
     """Scrape the OpenStax Chemistry 2e Key Terms"""
 
@@ -25,13 +26,19 @@ def get_terms(chapter: int):
         term = dl.find('dt').decode_contents()
         definition = dl.find('dd').decode_contents()
 
-        # Handle Greek symbols and em tags
+        # Handle Greek symbols, em tags, subscript, and superscript
         term = BeautifulSoup(term, 'html.parser').get_text()
         definition = BeautifulSoup(definition, 'html.parser').get_text()
 
         # Handle apostrophes
         term = term.replace("’", "'")
         definition = definition.replace("’", "'")
+
+        # Handle subscript and superscript
+        term = term.replace('<sub>', '_').replace('</sub>', '')
+        term = term.replace('<sup>', '^').replace('</sup>', '')
+        definition = definition.replace('<sub>', '_').replace('</sub>', '')
+        definition = definition.replace('<sup>', '^').replace('</sup>', '')
 
         yield term, definition
 
