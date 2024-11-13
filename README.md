@@ -1,2 +1,3 @@
-# OpenStax-Scraper
-Scrape OpenStax for MCAT related definitions/equations.
+# Anki-Scrapers
+
+A repo for holding my anki deck creation routines.
